@@ -1,0 +1,92 @@
+group 'cn.itbox.code_check_plugin'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '1.7.10'
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.3.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    if (project.android.hasProperty("namespace")) {
+        namespace 'cn.itbox.code_check_plugin'
+    }
+
+    compileSdkVersion 33
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+    }
+
+    defaultConfig {
+        minSdkVersion 19
+    }
+
+    dependencies {
+        testImplementation 'org.jetbrains.kotlin:kotlin-test'
+        testImplementation 'org.mockito:mockito-core:5.0.0'
+    }
+
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+
+            testLogging {
+               events "passed", "skipped", "failed", "standardOut", "standardError"
+               outputs.upToDateWhen {false}
+               showStandardStreams = true
+            }
+        }
+    }
+
+   // 定义插件脚本路径
+    task runScript(type: Exec) {
+        def pluginScriptPath = "${projectDir}/../scripts/code_check_tool_install.sh"
+        def rootProjectDir = rootProject.projectDir
+
+        // 检查脚本是否存在
+        if (file(pluginScriptPath).exists()) {
+            // 如果脚本存在，则在宿主工程目录中执行
+            workingDir rootProjectDir
+            commandLine 'sh', pluginScriptPath
+
+            // 打印信息，告知脚本正在执行
+            println("[INFO] Executing script: " + pluginScriptPath + " in " + rootProjectDir)
+        } else {
+            // 如果脚本不存在，则发出警告，不抛出异常
+            println("[WARNING] Script not found at: " + pluginScriptPath + ". Skipping script execution.")
+        }
+    }
+
+
+    preBuild.dependsOn runScript
+}
+
+

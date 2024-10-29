@@ -1,0 +1,155 @@
+# This file configures the analyzer, which statically analyzes Dart code to
+# check for errors, warnings, and lints.
+#
+# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
+# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
+# invoked from the command line by running `flutter analyze`.
+
+# The following line activates a set of recommended lints for Flutter apps,
+# packages, and plugins designed to encourage good coding practices.
+include: package:flutter_lints/flutter.yaml
+
+# 启用严格模式以增强代码质量
+#analyzer:
+#  strong-mode:
+#    implicit-casts: true  # 禁止隐式类型转换：确保类型转换是显式的，从而避免意外的类型错误。
+#    implicit-dynamic: true  # 禁止隐式动态类型：避免在没有明确类型声明的情况下使用 dynamic 类型，提高类型安全性。
+#  errors:
+#    # 启用特定的错误
+#    missing_required_param: error  # 缺少必需参数时报告错误：确保所有必需的参数都提供了。
+#    missing_return: error  # 缺少返回值时报告错误：确保所有函数都具有明确的返回类型。
+#    missing_default_value_for_parameter: error  # 参数缺少默认值时报告错误：确保所有可选参数都具有默认值。
+#    non_constant_identifier_names: error  # 非常量标识符命名错误：强制使用常量时要遵循命名约定。
+#    unused_element: error
+#    unused_local_variable: error
+#
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "**/*.gen.dart"
+    - "**/*.gr.dart"
+    - "**/*.mocks.dart"
+  strong-mode:
+    implicit-casts: false  # 禁止隐式类型转换
+    implicit-dynamic: false  # 禁止隐式动态类型
+
+  errors:
+    missing_required_param: error  # 缺少必需参数时报错
+    missing_return: error  # 缺少返回值时报错
+    missing_default_value_for_parameter: error  # 可选参数缺少默认值时报错
+    non_constant_identifier_names: error  # 强制常量遵循命名规范
+    unused_import: error  # 未使用的导入应作为错误处理
+    dead_code: error  # 未使用的代码处理为错误
+    avoid_init_to_null: error  # 不应将变量初始化为 null
+    avoid_returning_null: error  # 避免返回 null
+    avoid_shadowing_type_parameters: error  # 避免类型参数重影
+    no_logic_in_create_state: error  # 避免在 createState 中有逻辑
+    invalid_required_positional_param: error  # 必须有正确的必需位置参数
+    missing_enum_constant_in_switch: error  # switch 必须涵盖所有枚举值
+    await_only_futures: error  # await 只能用于 Future
+    prefer_const_declarations: warning  # 尽可能使用 const 声明
+    prefer_typing_uninitialized_variables: warning  # 使用未初始化变量时强制类型标注
+    public_member_api_docs: warning  # 公开 API 成员应有文档注释
+    unnecessary_parenthesis: warning  # 避免不必要的括号
+    prefer_expression_function_bodies: warning  # 函数应尽量简写为表达式形式
+    prefer_final_locals: warning  # 局部变量应使用 final
+
+# 指定 linter 规则
+linter:
+  rules:
+    # 一般建议
+    always_declare_return_types: true  # 始终声明返回类型：确保函数和方法的返回类型是明确的。
+    always_require_non_null_named_parameters: true  # 始终要求非空的命名参数：确保命名参数不能为 null。
+    annotate_overrides: true  # 重写方法时添加 @override 注解：确保重写父类方法时有明确标记。
+    avoid_as: true  # 避免使用 as 类型转换：鼓励使用类型检查而不是类型转换，减少类型错误的风险。
+    avoid_empty_else: true  # 避免空的 else 语句：清除不必要的代码，保持代码简洁。
+    avoid_init_to_null: true  # 避免将变量初始化为 null：避免不必要的 null 初始化，提升代码可读性。
+    avoid_print: true  # 避免使用 print 语句：使用更专业的日志记录方式替代 print。
+    avoid_relative_lib_imports: true  # 避免使用相对路径导入库：使用绝对路径导入，确保导入路径的一致性。
+    avoid_returning_null_for_void: true  # 避免为 void 返回 null：确保 void 方法不返回任何值。
+    avoid_single_cascade_in_expression_statements: true  # 避免在表达式语句中使用单级联：级联操作应该用在更复杂的链式调用中。
+    avoid_unnecessary_containers: true  # 避免使用不必要的容器：减少多余的容器，优化布局层级。
+    avoid_unused_constructor_parameters: true  # 避免未使用的构造函数参数：清除未使用的参数，保持代码简洁。
+    camel_case_types: true  # 使用驼峰命名法定义类型：遵循 Dart 的命名规范，提升代码一致性。
+    cancel_subscriptions: true  # 取消订阅：确保在不需要时正确取消订阅，避免内存泄漏。
+    cascade_invocations: true  # 使用级联调用：鼓励使用级联操作符简化多次对同一对象的调用。
+    constant_identifier_names: true  # 常量使用全大写命名法：遵循常量命名约定，提升代码可读性。
+    control_flow_in_finally: true  # 避免在 finally 语句中使用控制流语句：避免 finally 块中的控制流操作，保持代码逻辑清晰。
+    collection_methods_unrelated_type: true  # 避免在集合方法中使用不相关的类型：确保集合操作仅针对相关类型。
+    curly_braces_in_flow_control_structures: true  # 在控制流结构中使用大括号：即使只有一行代码，也要使用大括号，提升代码安全性。
+    diagnostic_describe_all_properties: true  # 诊断描述所有属性：确保在诊断方法中描述所有属性，提升调试信息的完整性。
+    directives_ordering: true  # 按顺序组织导入指令：按照 Dart 的导入指令顺序规范组织导入，提高代码整洁性。
+    empty_catches: true  # 避免空的 catch 语句：确保异常被正确处理或记录，避免忽略异常。
+    empty_constructor_bodies: true  # 避免空的构造函数体：清除不必要的空构造函数体，保持代码简洁。
+    empty_statements: true  # 避免空语句：清除无意义的空语句，保持代码简洁。
+    file_names: true  # 文件命名规范：使用小写加下划线命名文件，遵循 Dart 的文件命名约定。
+    flutter_style_todos: true  # 使用 Flutter 风格的 TODO 注释：遵循 Flutter 风格添加 TODO 注释，提升可读性。
+    hash_and_equals: true  # 实现 hashCode 和 equals 方法：确保自定义类具有正确的哈希和相等性实现。
+    implementation_imports: true  # 避免直接导入实现文件：仅导入库的公开接口，避免直接导入实现细节。
+    join_return_with_assignment: true  # 合并返回语句与赋值语句：简化代码逻辑，将赋值和返回合并。
+    library_names: true  # 库命名规范：使用小写加下划线命名库，遵循 Dart 的库命名约定。
+    library_prefixes: true  # 库前缀命名规范：使用有意义的前缀命名库，提升代码可读性。
+    lines_longer_than_80_chars: false  # 允许行长度超过 80 个字符：在必要时允许较长的代码行。
+    literal_only_boolean_expressions: true  # 仅使用字面量布尔表达式：确保布尔表达式是字面量，提高代码清晰度。
+    no_duplicate_case_values: true  # 避免重复的 switch case 值：确保每个 case 值唯一，避免逻辑错误。
+    no_leading_underscores_for_library_prefixes: true  # 库前缀不以下划线开头：遵循命名约定，提升代码一致性。
+    non_constant_identifier_names: true  # 非常量标识符命名规范：使用正确的命名约定，提升代码可读性。
+    one_member_abstracts: true  # 抽象类只有一个成员：避免抽象类中定义多个成员，保持代码简洁。
+    only_throw_errors: true  # 仅抛出 Error 类型：确保异常处理符合 Dart 的最佳实践。
+    overridden_fields: true  # 避免重写字段：避免在子类中重写父类字段，遵循面向对象设计原则。
+    package_api_docs: true  # 包 API 文档规范：确保包的公共 API 有完整的文档注释。
+    package_names: true  # 包命名规范：使用小写加下划线命名包，遵循 Dart 的包命名约定。
+    package_prefixed_library_names: true  # 包前缀库命名规范：使用包前缀命名库，避免命名冲突。
+    parameter_assignments: true  # 避免在构造函数中赋值参数：遵循 Dart 的参数赋值规范。
+    prefer_adjacent_string_concatenation: true  # 优先使用相邻的字符串连接：使用相邻字符串连接替代 '+' 操作符。
+    prefer_bool_in_asserts: true  # 在断言中使用布尔值：确保断言条件为布尔类型，提升代码可读性。
+    prefer_collection_literals: true  # 优先使用集合字面量：使用集合字面量创建集合，提升代码简洁性。
+    prefer_conditional_assignment: true  # 优先使用条件赋值：使用条件赋值简化代码逻辑。
+    prefer_const_constructors: true  # 优先使用 const 构造函数：使用 const 构造函数创建常量对象，提升性能。
+    prefer_const_constructors_in_immutables: true  # 在不可变类中优先使用 const 构造函数：确保不可变类使用 const 构造函数。
+    prefer_const_declarations: true  # 优先使用 const 声明：使用 const 声明常量，提升代码可读性和性能。
+    prefer_const_literals_to_create_immutables: true  # 优先使用 const 字面量创建不可变集合：提升代码性能和可读性。
+    prefer_contains: true  # 优先使用 contains 方法：使用集合的 contains 方法代替其它方式检查元素存在。
+    #    prefer_double_quotes: true  # 优先使用双引号（未启用）：在必要时使用双引号。
+    prefer_final_fields: true  # 优先使用 final 声明字段：使用 final 声明不可变的字段，提升代码可读性。
+    prefer_final_in_for_each: true  # 在 forEach 循环中优先使用 final：使用 final 声明循环变量，避免意外修改。
+    prefer_final_locals: true  # 优先使用 final 声明局部变量：使用 final 声明局部变量，提升代码可读性和安全性。
+    prefer_foreach: true  # 优先使用 forEach 方法：使用 forEach 方法替代传统 for 循环，提高代码简洁性。
+    prefer_function_declarations_over_variables: true  # 优先使用函数声明：使用函数声明替代函数表达式，提升代码可读性。
+    prefer_generic_function_type_aliases: true  # 优先使用泛型函数类型别名：使用泛型函数类型别名提高代码简洁性和可读性。
+    prefer_if_elements_to_conditional_expressions: true  # 在集合中优先使用 if 元素：使用 if 元素简化集合创建。
+    prefer_inlined_adds: true  # 优先使用内联添加方法：在集合创建时直接添加元素，简化代码。
+    prefer_interpolation_to_compose_strings: true  # 优先使用字符串插值：使用字符串插值替代字符串连接，提升代码可读性。
+    prefer_is_empty: true  # 优先使用 isEmpty 方法：使用集合的 isEmpty 方法检查是否为空。
+    prefer_is_not_empty: true  # 优先使用 isNotEmpty 方法：使用集合的 isNotEmpty 方法检查是否不为空。
+    prefer_iterable_whereType: true  # 优先使用 whereType 方法：使用 whereType 方法过滤集合中的特定类型。
+    prefer_single_quotes: true  # 优先使用单引号：使用单引号声明字符串，遵循 Dart 的字符串命名约定。
+    prefer_spread_collections: true  # 优先使用扩展操作符：使用扩展操作符创建集合，简化代码。
+    recursive_getters: true  # 避免递归 getter：避免递归调用 getter，防止无限循环。
+    sized_box_for_whitespace: true  # 使用 SizedBox 创建空白空间：使用 SizedBox 控件创建布局中的空白，替代不必要的容器。
+    sort_child_properties_last: true  # 子组件属性放在最后：在组件构造函数中将子组件属性放在最后，提升可读性。
+    sort_constructors_first: true  # 构造函数放在类定义的最前面：在类中首先定义构造函数，遵循代码组织原则。
+    sort_unnamed_constructors_first: true  # 未命名构造函数放在命名构造函数之前：在类中首先定义未命名构造函数，遵循代码组织原则。
+    test_types_in_equals: true  # 在 equals 方法中测试类型：在 equals 方法中首先检查类型，确保逻辑正确性。
+    throw_in_finally: true  # 避免在 finally 代码块中抛出异常：防止在 finally 块中抛出异常，确保代码逻辑清晰。
+    type_annotate_public_apis: true  # 对公共 API 进行类型注解：在公共 API 中明确类型注解，提升代码可读性和安全性。
+    type_init_formals: true  # 在构造函数参数中使用类型注解：确保构造函数参数具有明确的类型注解。
+    unawaited_futures: true  # 检查未等待的 Future：确保所有异步调用都正确等待，避免未处理的异步操作。
+    unnecessary_brace_in_string_interps: true  # 避免字符串插值中不必要的大括号：简化字符串插值中的大括号，提升可读性。
+    unnecessary_getters_setters: true  # 避免不必要的 getter 和 setter：清除不必要的 getter 和 setter 方法，简化代码。
+    unnecessary_lambdas: true  # 避免不必要的 lambda 表达式：清除不必要的 lambda 表达式，简化代码逻辑。
+    unnecessary_null_aware_assignments: true  # 避免不必要的空安全赋值：清除不必要的空安全赋值操作，简化代码。
+    unnecessary_null_in_if_null_operators: true  # 避免 if-null 运算符中的不必要 null 值：确保 if-null 运算符的逻辑简洁。
+    unnecessary_overrides: true  # 避免不必要的重写：清除不必要的重写方法，简化代码。
+    unnecessary_parenthesis: true  # 避免不必要的括号：清除不必要的括号，简化代码。
+    unnecessary_string_escapes: true  # 避免不必要的字符串转义：清除不必要的字符串转义字符，简化代码。
+    unnecessary_this: true  # 避免不必要的 this 关键字：清除不必要的 this 关键字，简化代码。
+    use_full_hex_values_for_flutter_colors: true  # 使用完整的十六进制颜色值：在 Flutter 中使用完整的颜色值，确保颜色定义准确。
+    use_function_type_syntax_for_parameters: true  # 使用函数类型语法定义参数类型：使用函数类型语法定义参数，提升代码可读性。
+    use_key_in_widget_constructors: true  # 在 widget 构造函数中使用 key 参数：确保在自定义 widget 构造函数中提供 key 参数。
+    use_rethrow_when_possible: true  # 在适当情况下使用 rethrow 关键字：使用 rethrow 重新抛出捕获的异常，保持异常堆栈信息。
+    use_setters_to_change_properties: true  # 使用 setter 方法更改属性值：使用 setter 方法更改属性值，保持代码规范。
+    use_string_buffers: true  # 使用 StringBuffer 进行字符串拼接：使用 StringBuffer 进行大量字符串拼接，提升性能。
+    use_super_parameters: true  # 在构造函数中使用 super 参数：在子类构造函数中直接传递父类构造函数参数，简化代码。
+    valid_regexps: true  # 使用有效的正则表达式：确保正则表达式语法正确，避免运行时错误。
